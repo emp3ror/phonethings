@@ -7,24 +7,44 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your main sim is : "
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/currentSim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_sim1"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sim 1"/>
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btn_sim2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NTC (mine)"/>
+        </LinearLayout>
+    <TextView
         android:id="@+id/text_sim1"
         android:text=""
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/btn_sim1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sim 1"/>
+
     <TextView
         android:id="@+id/text_sim2"
         android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/btn_sim2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sim 2"/>
+
 
 </LinearLayout>

@@ -23,6 +23,7 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
 
     private Button btnSim1;
     private Button btnSim2;
+    private TextView currentSim;
     private TextView textSim1;
     private TextView textSim2;
     private TelephonyManager tMgr;
@@ -44,16 +45,15 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         btnSim2 = (Button) findViewById(R.id.btn_sim2);
         textSim1 = (TextView) findViewById(R.id.text_sim1);
         textSim2 = (TextView) findViewById(R.id.text_sim2);
+        currentSim = (TextView) findViewById(R.id.currentSim);
 
         tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        String location = tMgr.getCellLocation().toString();
-        textSim1.setText(location);
-        tMgr2 = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        final String mPhoneNumber = tMgr.getLine1Number();
 
-        String sim1operator = tMgr.getSimOperatorName();
-        btnSim1.setText(sim1operator);
-//        String mPhoneNumber2 = tMgr.getLine1Number();
+        String currentOperator = tMgr.getSimOperatorName();
+        currentSim.setText(currentOperator);
+
+        String location = tMgr.getCellLocation().toString();
+        textSim1.setText("location by tower"+location); //location , dont know what it means
 
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -62,7 +62,6 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         btnSim1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("ph", mPhoneNumber);
                 String getSimSerialNumber = tMgr.getSimSerialNumber();
                 Log.e("serial",getSimSerialNumber);
                 String imei_no = tMgr.getDeviceId();
@@ -70,8 +69,6 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
                 textSim1.setText(getSimSerialNumber+" "+imei_no);
                 String encodedHash = Uri.encode("#");
                 String ussd = "*103" + encodedHash;
-                /*startActivityForResult(new Intent("android.intent.action.CALL",
-                        Uri.parse("tel:" + ussd)), 1);*/
                 Intent callIntent = new Intent(Intent.ACTION_CALL)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 callIntent.putExtra("com.android.phone.extra.slot", 0);
@@ -99,26 +96,6 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
             }
         });
 
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        super.onActivityResult(requestCode, resultCode, data);
-
-        Toast.makeText(getApplicationContext(), "ok" +
-                "USSD: " + requestCode + "  " + resultCode + " ", Toast.LENGTH_LONG).show();
-
-        if (requestCode == 1) {
-
-
-            if (resultCode == RESULT_OK) {
-                Log.e("check","what");
-                // String result=data.getStringExtra("result");
-                String dd = data.toString();
-                Toast.makeText(getApplicationContext(), dd, Toast.LENGTH_LONG).show();
-            }
-        }
     }
 
 
