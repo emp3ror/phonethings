@@ -62,11 +62,11 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         btnSim1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String getSimSerialNumber = tMgr.getSimSerialNumber();
+                /*String getSimSerialNumber = tMgr.getSimSerialNumber();
                 Log.e("serial",getSimSerialNumber);
                 String imei_no = tMgr.getDeviceId();
                 Log.d("imei",imei_no);
-                textSim1.setText(getSimSerialNumber+" "+imei_no);
+                textSim1.setText(getSimSerialNumber+" "+imei_no);*/
                 String encodedHash = Uri.encode("#");
                 String ussd = "*103" + encodedHash;
                 Intent callIntent = new Intent(Intent.ACTION_CALL)
