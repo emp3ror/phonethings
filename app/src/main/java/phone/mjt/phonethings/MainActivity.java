@@ -28,7 +28,8 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
     private TextView textSim2;
     private TelephonyManager tMgr;
     private TelephonyManager tMgr2;
-
+    private float[] gravity= new float[3];
+    private float[] linear_acceleration = new float[3];
     private Context context;
 
     private SensorManager senSensorManager;
@@ -126,11 +127,25 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         Sensor mySensor = sensorEvent.sensor;
 
         if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+
             float x = sensorEvent.values[0];
             float y = sensorEvent.values[1];
             float z = sensorEvent.values[2];
 
-            textSim2.setText("x ="+x+"\ny="+y+"\nz="+z);
+
+
+            final float alpha = (float) 0.8;
+
+
+            gravity[0] = alpha * gravity[0] + (1 - alpha) * sensorEvent.values[0];
+            gravity[1] = alpha * gravity[1] + (1 - alpha) * sensorEvent.values[1];
+            gravity[2] = alpha * gravity[2] + (1 - alpha) * sensorEvent.values[2];
+
+            linear_acceleration[0] = sensorEvent.values[0] - gravity[0];
+            linear_acceleration[1] = sensorEvent.values[1] - gravity[1];
+            linear_acceleration[2] = sensorEvent.values[2] - gravity[2];
+            textSim2.setText("x ="+x+"      "+linear_acceleration[0]+"\ny="+y+"      "+linear_acceleration[1]+"\nz="+z+"      "+linear_acceleration[2]);
+
         }
     }
 
