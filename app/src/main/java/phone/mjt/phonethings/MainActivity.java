@@ -6,9 +6,14 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
@@ -25,7 +30,7 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
     private Button btnSim2;
     private TextView currentSim;
     private TextView textSim1;
-    private TextView textSim2;
+    private TextView textSim2, location_test;
     private TelephonyManager tMgr;
     private TelephonyManager tMgr2;
     private float[] gravity= new float[3];
@@ -47,6 +52,7 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         textSim1 = (TextView) findViewById(R.id.text_sim1);
         textSim2 = (TextView) findViewById(R.id.text_sim2);
         currentSim = (TextView) findViewById(R.id.currentSim);
+        location_test =(TextView) findViewById(R.id.location_test);
 
         tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
@@ -97,7 +103,18 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
             }
         });
 
+        LocationManager locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        String providerName=LocationManager.NETWORK_PROVIDER;
+        Location location2=locationManager.getLastKnownLocation(providerName);
+        double latitude = location2.getLatitude();
+        double longitude = location2.getLongitude();
+        double acc = location2.getAccuracy();
+        double altitude = location2.getAltitude();
+        location_test.setText("latitude ="+latitude+"\nlongitude ="+longitude+"\naccuracy ="+acc+"\naltitude = "+altitude);
+//        updateWithLocation(location);
+
     }
+
 
 
     @Override
