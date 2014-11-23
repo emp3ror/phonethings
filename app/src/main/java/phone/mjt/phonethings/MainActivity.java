@@ -32,11 +32,11 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
     private TextView textSim1;
     private TextView textSim2, location_test;
     private TelephonyManager tMgr;
-    private TelephonyManager tMgr2;
     private float[] gravity= new float[3];
     private float[] linear_acceleration = new float[3];
     private Context context;
 
+    private String sim1,sim2;
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
 
@@ -58,6 +58,22 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
 
         String currentOperator = tMgr.getSimOperatorName();
         currentSim.setText(currentOperator);
+        btnSim1.setText(currentOperator);
+        Log.e("count length",currentOperator.length()+" "+currentOperator+"@ncell = "+"ncell".length());
+        String lowerCased = currentOperator.toLowerCase();
+        Log.e("lowerd","****"+lowerCased+"****");
+        Log.e("lowerCased",lowerCased);
+        if (lowerCased!="ncell"){
+            btnSim2.setText("Namaste");
+            sim1 = "ncell";
+            sim2 = "ntc";
+        } else {
+            Log.e("currentOperator=","**"+currentOperator.toLowerCase());
+            btnSim2.setText("Ncell");
+            sim2 = "ncell";
+            sim1 = "ntc";
+        }
+
 
         String location = tMgr.getCellLocation().toString();
         textSim1.setText("location by tower"+location); //location , dont know what it means
@@ -69,37 +85,14 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         btnSim1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*String getSimSerialNumber = tMgr.getSimSerialNumber();
-                Log.e("serial",getSimSerialNumber);
-                String imei_no = tMgr.getDeviceId();
-                Log.d("imei",imei_no);
-                textSim1.setText(getSimSerialNumber+" "+imei_no);*/
-                String encodedHash = Uri.encode("#");
-                String ussd = "*103" + encodedHash;
-                Intent callIntent = new Intent(Intent.ACTION_CALL)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                callIntent.putExtra("com.android.phone.extra.slot", 0);
-                callIntent.putExtra("simSlot", 0);
-                callIntent.setData(Uri.parse("tel:" + ussd));
-                context.startActivity(callIntent);
+                dialCell(0,sim1);
             }
         });
 
         btnSim2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String encodedHash = Uri.encode("#");
-                String ussd = "*9" + encodedHash;
-                /*startActivityForResult(new Intent("android.intent.action.CALL",
-                        Uri.parse("tel:" + ussd)), 1);*/
-                Intent callIntent = new Intent(Intent.ACTION_CALL)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                callIntent.putExtra("com.android.phone.extra.slot", 1);
-                callIntent.putExtra("simSlot", 1);
-                String sim2operator = tMgr.getSimOperatorName();
-                Log.e("sim",sim2operator);
-                callIntent.setData(Uri.parse("tel:" + ussd));
-                context.startActivity(callIntent);
+                dialCell(1,sim2);
             }
         });
 
@@ -115,6 +108,37 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
 
     }
 
+    private void dialCell(int simNum, String simType){
+        if(simType == "ncell"){
+            ncell(simNum);
+        } else {
+            ntc(simNum);
+        }
+    }
+
+    private void ntc(int cellNo){
+        String encodedHash = Uri.encode("#");
+        String ussd = "*9" + encodedHash;
+        Intent callIntent = new Intent(Intent.ACTION_CALL)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        callIntent.putExtra("com.android.phone.extra.slot", cellNo);
+        callIntent.putExtra("simSlot", cellNo);
+        String sim2operator = tMgr.getSimOperatorName();
+        Log.e("sim",sim2operator);
+        callIntent.setData(Uri.parse("tel:" + ussd));
+        context.startActivity(callIntent);
+    }
+
+    private void ncell(int cellNo) {
+        String encodedHash = Uri.encode("#");
+        String ussd = "*103" + encodedHash;
+        Intent callIntent = new Intent(Intent.ACTION_CALL)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        callIntent.putExtra("com.android.phone.extra.slot", cellNo);
+        callIntent.putExtra("simSlot", cellNo);
+        callIntent.setData(Uri.parse("tel:" + ussd));
+        context.startActivity(callIntent);
+    }
 
 
     @Override
