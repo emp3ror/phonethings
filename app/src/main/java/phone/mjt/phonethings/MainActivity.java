@@ -63,7 +63,8 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         String lowerCased = currentOperator.toLowerCase();
         Log.e("lowerd","****"+lowerCased+"****");
         Log.e("lowerCased",lowerCased);
-        if (lowerCased!="ncell"){
+        /* == should be replaced by equalsIgnoreCase o.O*/
+        if (lowerCased.equalsIgnoreCase("ncell")){
             btnSim2.setText("Namaste");
             sim1 = "ncell";
             sim2 = "ntc";
