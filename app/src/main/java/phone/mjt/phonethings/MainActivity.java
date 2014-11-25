@@ -118,30 +118,54 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         altitude = location2.getAltitude();
     }
 
-    private void dialCell(){
+    private void dialCell(int type){
+        /*
+        * type 0 = get phone number
+        *       1 = get balance*/
         if(simType.equalsIgnoreCase("ncell")){
-            ncell(simNum);
+            ncell(simNum, type);
         } else {
-            ntc(simNum);
+            ntc(simNum,type);
         }
     }
 
-    private void ntc(int cellNo){
+    private void ntc(int cellNo,int type){
         String encodedHash = Uri.encode("#");
-        String ussd = "*9" + encodedHash;
+        String ussd ;
+        switch (type) {
+            case 0:
+                ussd = "*9" + encodedHash;
+                break;
+            case 1:
+                ussd = "*400" + encodedHash;
+                break;
+            default:
+                ussd = "*9" + encodedHash;
+        }
+
         Intent callIntent = new Intent(Intent.ACTION_CALL)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         callIntent.putExtra("com.android.phone.extra.slot", cellNo);
         callIntent.putExtra("simSlot", cellNo);
         String sim2operator = tMgr.getSimOperatorName();
-        Log.e("sim",sim2operator);
+        Log.e("sim","mmm"+sim2operator);
         callIntent.setData(Uri.parse("tel:" + ussd));
         context.startActivity(callIntent);
     }
 
-    private void ncell(int cellNo) {
+    private void ncell(int cellNo,int type) {
         String encodedHash = Uri.encode("#");
-        String ussd = "*103" + encodedHash;
+        String ussd ;
+        switch (type) {
+            case 0:
+                ussd = "*103" + encodedHash;
+                break;
+            case 1:
+                ussd = "*101" + encodedHash;
+                break;
+            default:
+                ussd = "*103" + encodedHash;
+        }
         Intent callIntent = new Intent(Intent.ACTION_CALL)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         callIntent.putExtra("com.android.phone.extra.slot", cellNo);
@@ -225,7 +249,10 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.getPhNo:
-                dialCell();
+                dialCell(0);
+                return true;
+            case R.id.getBal:
+                dialCell(1);
                 return true;
             case R.id.getlocation:
                 Toast.makeText(context,"getlocation",Toast.LENGTH_LONG).show();
