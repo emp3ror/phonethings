@@ -59,10 +59,10 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         String currentOperator = tMgr.getSimOperatorName();
         currentSim.setText(currentOperator);
         btnSim1.setText(currentOperator);
-        Log.e("count length",currentOperator.length()+" "+currentOperator+"@ncell = "+"ncell".length());
+//        Log.e("count length",currentOperator.length()+" "+currentOperator+"@ncell = "+"ncell".length());
         String lowerCased = currentOperator.toLowerCase();
-        Log.e("lowerd","****"+lowerCased+"****");
-        Log.e("lowerCased",lowerCased);
+        /*Log.e("lowerd","****"+lowerCased+"****");
+        Log.e("lowerCased",lowerCased);*/
         /* == should be replaced by equalsIgnoreCase o.O*/
         if (lowerCased.equalsIgnoreCase("ncell")){
             btnSim2.setText("Namaste");
@@ -174,10 +174,7 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
             float y = sensorEvent.values[1];
             float z = sensorEvent.values[2];
 
-
-
             final float alpha = (float) 0.8;
-
 
             gravity[0] = alpha * gravity[0] + (1 - alpha) * sensorEvent.values[0];
             gravity[1] = alpha * gravity[1] + (1 - alpha) * sensorEvent.values[1];
