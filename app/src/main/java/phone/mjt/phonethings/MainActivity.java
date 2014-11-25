@@ -16,10 +16,14 @@ import android.os.Bundle;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,15 +32,15 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
 
     private Button btnSim1;
     private Button btnSim2;
-    private TextView currentSim;
-    private TextView textSim1;
-    private TextView textSim2, location_test;
+    private TextView textSim2;
+    private ImageView btnLocation;
     private TelephonyManager tMgr;
     private float[] gravity= new float[3];
     private float[] linear_acceleration = new float[3];
     private Context context;
-
-    private String sim1,sim2;
+    private String sim1, sim2, clicked,simType;
+    private int simNum;
+    private double latitude, longitude, acc, altitude;
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
 
@@ -49,21 +53,14 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
 
         btnSim1 = (Button) findViewById(R.id.btn_sim1);
         btnSim2 = (Button) findViewById(R.id.btn_sim2);
-        textSim1 = (TextView) findViewById(R.id.text_sim1);
         textSim2 = (TextView) findViewById(R.id.text_sim2);
-        currentSim = (TextView) findViewById(R.id.currentSim);
-        location_test =(TextView) findViewById(R.id.location_test);
+        btnLocation = (ImageView) findViewById(R.id.location);
 
         tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
         String currentOperator = tMgr.getSimOperatorName();
-        currentSim.setText(currentOperator);
         btnSim1.setText(currentOperator);
-//        Log.e("count length",currentOperator.length()+" "+currentOperator+"@ncell = "+"ncell".length());
         String lowerCased = currentOperator.toLowerCase();
-        /*Log.e("lowerd","****"+lowerCased+"****");
-        Log.e("lowerCased",lowerCased);*/
-        /* == should be replaced by equalsIgnoreCase o.O*/
         if (lowerCased.equalsIgnoreCase("ncell")){
             btnSim2.setText("Namaste");
             sim1 = "ncell";
@@ -75,42 +72,54 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
             sim1 = "ntc";
         }
 
-
-        String location = tMgr.getCellLocation().toString();
-        textSim1.setText("location by tower"+location); //location , dont know what it means
-
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener((android.hardware.SensorEventListener) this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
 
+        /*btnsim1 & btnSim2 context menu click registering*/
+        registerForContextMenu(btnSim1);
         btnSim1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialCell(0,sim1);
+                clicked = "sim";
+                simNum = 0;
+                simType = sim1;
+                openContextMenu(view);
             }
         });
-
+        registerForContextMenu(btnSim2);
         btnSim2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialCell(1,sim2);
+                clicked = "sim";
+                simNum = 1;
+                simType = sim2;
+                openContextMenu(view);
+            }
+        });
+
+        /* register location icon for context menu*/
+        registerForContextMenu(btnLocation);
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clicked="location";
+
+                openContextMenu(view);
             }
         });
 
         LocationManager locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
         String providerName=LocationManager.NETWORK_PROVIDER;
         Location location2=locationManager.getLastKnownLocation(providerName);
-        double latitude = location2.getLatitude();
-        double longitude = location2.getLongitude();
-        double acc = location2.getAccuracy();
-        double altitude = location2.getAltitude();
-        location_test.setText("latitude ="+latitude+"\nlongitude ="+longitude+"\naccuracy ="+acc+"\naltitude = "+altitude);
-//        updateWithLocation(location);
-
+        latitude = location2.getLatitude();
+        longitude = location2.getLongitude();
+        acc = location2.getAccuracy();
+        altitude = location2.getAltitude();
     }
 
-    private void dialCell(int simNum, String simType){
-        if(simType == "ncell"){
+    private void dialCell(){
+        if(simType.equalsIgnoreCase("ncell")){
             ncell(simNum);
         } else {
             ntc(simNum);
@@ -191,5 +200,39 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        if (clicked.equalsIgnoreCase("sim")){
+            inflater.inflate(R.menu.cell_menu, menu);
+        }
+        else if (clicked.equalsIgnoreCase("location")){
+            menu.setHeaderTitle("Location By tower");
+            menu.add(Menu.NONE, v.getId(), 0, "Latitude : "+latitude);
+            menu.add(Menu.NONE, v.getId(), 0, "Longitude : "+longitude);
+            menu.add(Menu.NONE, v.getId(), 0, "Accuracy : "+acc);
+            menu.add(Menu.NONE, v.getId(), 0, "Altitude : "+altitude);
+        }
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.getPhNo:
+                dialCell();
+                return true;
+            case R.id.getlocation:
+                Toast.makeText(context,"getlocation",Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 }
