@@ -30,8 +30,8 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements SensorEventListener {
 
-    private Button btnSim1;
-    private Button btnSim2;
+    private TextView btnSim1;
+    private TextView btnSim2;
     private TextView textSim2;
     private ImageView btnLocation;
     private TelephonyManager tMgr;
@@ -51,8 +51,8 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
 
         context = getApplicationContext();
 
-        btnSim1 = (Button) findViewById(R.id.btn_sim1);
-        btnSim2 = (Button) findViewById(R.id.btn_sim2);
+        btnSim1 = (TextView) findViewById(R.id.btn_sim1);
+        btnSim2 = (TextView) findViewById(R.id.btn_sim2);
         textSim2 = (TextView) findViewById(R.id.text_sim2);
         btnLocation = (ImageView) findViewById(R.id.location);
 

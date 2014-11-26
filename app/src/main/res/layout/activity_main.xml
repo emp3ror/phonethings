@@ -15,17 +15,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
-            <Button
+            android:padding="10dp"
+            android:gravity="center">
+            <TextView
                 android:id="@+id/btn_sim1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sim 1"/>
-            <Button
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Sim 1"
+                android:background="@drawable/simbackground"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"/>
+            <TextView
                 android:id="@+id/btn_sim2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="NTC (mine)"/>
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:background="@drawable/simbackground"
+                android:layout_marginBottom="10dp"
+                android:text="sim 2"
+                android:gravity="center"/>
         </LinearLayout>
         <ImageView
             android:id="@+id/location"
