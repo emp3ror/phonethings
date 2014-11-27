@@ -122,13 +122,6 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         longitude = location2.getLongitude();
         acc = location2.getAccuracy();
         altitude = location2.getAltitude();
-
-        /*AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        mAdView.loadAd(adRequest);*/
-
     }
 
     private void dialCell(int type){
@@ -276,6 +269,8 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         }
     }
 
+
+
     /**
      * This class makes the ad request and loads the ad.
      */
@@ -298,7 +293,7 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
             // get test ads on a physical device. e.g.
             // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
             AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .addTestDevice("4763360FE0F27697DBF5E4B3A289EF08")
                     .build();
 
             // Start loading the ad in the background.
