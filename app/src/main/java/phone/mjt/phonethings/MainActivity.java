@@ -33,6 +33,8 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.util.Locale;
+
 
 public class MainActivity extends ActionBarActivity implements SensorEventListener {
 
@@ -61,9 +63,15 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         btnSim2 = (TextView) findViewById(R.id.btn_sim2);
         textSim2 = (TextView) findViewById(R.id.text_sim2);
         btnLocation = (ImageView) findViewById(R.id.location);
+        TextView tvCountry = (TextView) findViewById(R.id.tv_country);
 
         tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-
+        String country = tMgr.getSimCountryIso();
+        String coutry2 = tMgr.getNetworkCountryIso();
+        Locale loc = new Locale("",coutry2);
+        String loc2 = loc.getDisplayCountry();
+//        Log.w("country",country+"***"+loc2);
+        tvCountry.setText("country : "+loc2);
         String currentOperator = tMgr.getSimOperatorName();
         btnSim1.setText(currentOperator);
         String lowerCased = currentOperator.toLowerCase();
