@@ -11,21 +11,27 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 
 public class MainActivity extends ActionBarActivity implements SensorEventListener {
@@ -116,6 +122,13 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         longitude = location2.getLongitude();
         acc = location2.getAccuracy();
         altitude = location2.getAltitude();
+
+        /*AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        mAdView.loadAd(adRequest);*/
+
     }
 
     private void dialCell(int type){
@@ -261,5 +274,69 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    /**
+     * This class makes the ad request and loads the ad.
+     */
+    public static class AdFragment extends Fragment {
+
+        private AdView mAdView;
+
+        public AdFragment() {
+        }
+
+        @Override
+        public void onActivityCreated(Bundle bundle) {
+            super.onActivityCreated(bundle);
+
+            // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
+            // values/strings.xml.
+            mAdView = (AdView) getView().findViewById(R.id.adView);
+
+            // Create an ad request. Check logcat output for the hashed device ID to
+            // get test ads on a physical device. e.g.
+            // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .build();
+
+            // Start loading the ad in the background.
+            mAdView.loadAd(adRequest);
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.fragment_ad, container, false);
+        }
+
+        /** Called when leaving the activity */
+        @Override
+        public void onPause() {
+            if (mAdView != null) {
+                mAdView.pause();
+            }
+            super.onPause();
+        }
+
+        /** Called when returning to the activity */
+        @Override
+        public void onResume() {
+            super.onResume();
+            if (mAdView != null) {
+                mAdView.resume();
+            }
+        }
+
+        /** Called before the activity is destroyed */
+        @Override
+        public void onDestroy() {
+            if (mAdView != null) {
+                mAdView.destroy();
+            }
+            super.onDestroy();
+        }
+
     }
 }
