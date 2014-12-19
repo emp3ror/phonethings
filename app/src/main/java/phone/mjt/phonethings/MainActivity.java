@@ -125,6 +125,7 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
 
         LocationManager locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
         String providerName=LocationManager.NETWORK_PROVIDER;
+//        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         Location location2=locationManager.getLastKnownLocation(providerName);
         latitude = location2.getLatitude();
         longitude = location2.getLongitude();
@@ -186,6 +187,13 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         callIntent.putExtra("simSlot", cellNo);
         callIntent.setData(Uri.parse("tel:" + ussd));
         context.startActivity(callIntent);
+    }
+
+    /*click action for helpline
+    * calls intent*/
+    public void helpline (View view) {
+        Intent helpline = new Intent(this, Helpline.class);
+        startActivity(helpline);
     }
 
 
@@ -300,9 +308,9 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
             // Create an ad request. Check logcat output for the hashed device ID to
             // get test ads on a physical device. e.g.
             // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-            AdRequest adRequest = new AdRequest.Builder().build();
-                    /*.addTestDevice("4763360FE0F27697DBF5E4B3A289EF08")*/
-
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice("4763360FE0F27697DBF5E4B3A289EF08")
+                    .build();
 
             // Start loading the ad in the background.
             mAdView.loadAd(adRequest);

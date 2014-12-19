@@ -5,9 +5,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="banner_ad_unit_id">ca-app-pub-2287989983559331/6167379540</string>
-    <!--<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!-- <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string> -->
 
-    <!--<string name="country">
+
+    <!--
+<string name="country">
         Afghanistan 	AF 	AFG 	004 	ISO 3166-2:AF
 Åland Islands 	AX 	ALA 	248 	ISO 3166-2:AX
 Albania 	AL 	ALB 	008 	ISO 3166-2:AL
@@ -259,6 +261,9 @@ Zambia 	ZM 	ZMB 	894 	ISO 3166-2:ZM
 Zimbabwe 	ZW 	ZWE 	716 	ISO 3166-2:ZW
 
 
-    </string>-->
+    </string>
+    -->
+
+    <string name="title_activity_helpline">Helpline</string>
 
 </resources>

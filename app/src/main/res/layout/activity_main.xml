@@ -45,8 +45,8 @@
                 android:id="@+id/location"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/location"/>
-
+                android:src="@drawable/location"
+                android:layout_gravity="bottom"/>
             </LinearLayout>
         <TextView
             android:id="@+id/tv_country"
@@ -62,6 +62,13 @@
             android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/helpline"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/helpline"
+            android:layout_gravity="center"
+            android:onClick="helpline"/>
     </LinearLayout>
 
     <fragment
