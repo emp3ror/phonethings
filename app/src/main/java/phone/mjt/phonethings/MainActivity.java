@@ -127,10 +127,13 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         String providerName=LocationManager.NETWORK_PROVIDER;
 //        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         Location location2=locationManager.getLastKnownLocation(providerName);
-        latitude = location2.getLatitude();
-        longitude = location2.getLongitude();
-        acc = location2.getAccuracy();
-        altitude = location2.getAltitude();
+        if(location2!= null){
+            latitude = location2.getLatitude();
+            longitude = location2.getLongitude();
+            acc = location2.getAccuracy();
+            altitude = location2.getAltitude();
+        }
+
     }
 
     private void dialCell(int type){
