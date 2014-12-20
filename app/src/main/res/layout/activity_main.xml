@@ -7,11 +7,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:orientation="vertical"
             android:padding="10dp">
             <LinearLayout
@@ -56,14 +56,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
+
                 <ImageView
-                    android:id="@+id/helpline"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/helpline"
+                    android:id="@+id/btnAccelerometer"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:onClick="helpline"/>
+                    android:src="@drawable/accelerometer"/>
+                <ImageView
+                    android:id="@+id/btnBluetooth"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/bluetooth"
+                    android:layout_marginLeft="10dp"/>
                 <ImageView
                     android:id="@+id/btnSwitch"
                     android:layout_width="100dp"
@@ -75,18 +83,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
                 <ImageView
-                    android:id="@+id/btnAccelerometer"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/accelerometer"/>
-                <ImageView
-                    android:id="@+id/btnBluetooth"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/bluetooth"
-                    android:layout_marginLeft="50dp"/>
+                    android:id="@+id/helpline"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/helpline"
+                    android:layout_gravity="center"
+                    android:onClick="helpline"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
