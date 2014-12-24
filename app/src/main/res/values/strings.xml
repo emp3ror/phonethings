@@ -2,20 +2,7 @@
 <resources>
 
     <string name="app_name">Phonethings</string>
-    <string name="hello_world">Police Control 	100 \n
-    Police Emergency Number 4228435/4226853 \n
-            Fire Brigade 101\n
-    Blood Bank 4225344\n
-    Metropolitan Police Range (Kathmandu) 4261945/4261790\n
-        Metropolitan Police Range (Lalitpur) 5521207\n
-    Metropolitan Police Range (Bhaktapur) 6614821\n
-    Paropakar Ambulance Service 4260859\n
-    Lalitpur Redcross Ambulance Service 5545666\n
-    Bishal Bazar Ambulance Service 4244121\n
-    Redcross Ambulance Service 4228094\n
-    Agrawal Sewa Centre 4424875\n
-    Aasara Drug Rehabilitation Center 01-4384881\n
-        \n\nI ll make it look good afterwards :P</string>
+    <string name="hello_world">I ll make it look good afterwards :P</string>
     <string name="about">about</string>
     <string name="hi">hi from mjt, \n get source code of this project in https://github.com/emp3ror \n
         wanna get connect \n
