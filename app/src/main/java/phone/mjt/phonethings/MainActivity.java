@@ -12,6 +12,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -186,6 +187,8 @@ public class MainActivity extends ActionBarActivity {
         btnBluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MediaPlayer mp = MediaPlayer.create(context,R.raw.bombdrop);
+                mp.start();
                 Toast.makeText(context,"MJT is working on it",Toast.LENGTH_LONG).show();
             }
         });
@@ -193,6 +196,8 @@ public class MainActivity extends ActionBarActivity {
         btnAccelerometer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MediaPlayer mp = MediaPlayer.create(context,R.raw.bombdrop);
+                mp.start();
                 Toast.makeText(context,"MJT is working on it",Toast.LENGTH_LONG).show();
             }
         });

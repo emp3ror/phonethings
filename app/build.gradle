@@ -8,8 +8,8 @@ android {
         applicationId "phone.mjt.phonethings"
         minSdkVersion 10
         targetSdkVersion 20
-        versionCode 4
-        versionName "mjt"
+        versionCode 5
+        versionName "mjt_1.4"
     }
     buildTypes {
         release {

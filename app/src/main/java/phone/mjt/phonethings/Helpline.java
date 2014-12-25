@@ -31,9 +31,6 @@ public class Helpline extends ActionBarActivity {
         PhoneNum section = new PhoneNum("Police Control","100");
         phoneArrayList.add(section);
 
-        section = new PhoneNum("my home","4281582");
-        phoneArrayList.add(section);
-
         section = new PhoneNum("Police Emergency Number 1","4228435");
         phoneArrayList.add(section);
 
