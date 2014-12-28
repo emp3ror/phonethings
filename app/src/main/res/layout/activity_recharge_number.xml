@@ -13,7 +13,8 @@ tools:context="phone.mjt.phonethings.RechargeNumber">
         android:id="@+id/simType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sim"/>
+        android:text="sim"
+        android:textSize="18dp"/>
     <EditText
         android:id="@+id/rechargePin"
         android:layout_width="match_parent"

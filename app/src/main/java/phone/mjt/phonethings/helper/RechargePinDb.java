@@ -68,7 +68,7 @@ public class RechargePinDb extends SQLiteOpenHelper {
     public List<String> getAllPins() {
         List<String> pinList = new ArrayList<String>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_PINS;
+        String selectQuery = "SELECT  * FROM " + TABLE_PINS +" ORDER BY "+KEY_ID+" DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
