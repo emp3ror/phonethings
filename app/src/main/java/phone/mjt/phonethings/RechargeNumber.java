@@ -9,11 +9,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
+
+import phone.mjt.phonethings.helper.RechargePinDb;
 
 
 public class RechargeNumber extends ActionBarActivity {
@@ -25,6 +31,9 @@ public class RechargeNumber extends ActionBarActivity {
     private Button btnRecharge;
     private Context context;
     private int cellNo;
+    private RechargePinDb rechargePinDb;
+    private ListView listView;
+    private ArrayAdapter<String> listAdapter ;
 
 
     @Override
@@ -46,11 +55,40 @@ public class RechargeNumber extends ActionBarActivity {
         etRechargePin = (EditText) findViewById(R.id.rechargePin);
         cbPostpaid = (CheckBox) findViewById(R.id.checkPostpaid);
         btnRecharge = (Button) findViewById(R.id.btnRecharge);
+        listView = (ListView) findViewById(R.id.lvPastRechargePin);
 
         if (sim_type.equalsIgnoreCase("ncell")){
             cbPostpaid.setVisibility(View.INVISIBLE);
         }
 
+        rechargePinDb = new RechargePinDb(context);
+        // Reading all contacts
+        Log.d("Reading: ", "Reading all contacts..");
+        List<String> pinAll = rechargePinDb.getAllPins();
+
+        for (String pin : pinAll) {
+            String log = "num " + pin;
+            // Writing Contacts to log
+            Log.d("Name: ", log);
+        }
+
+//        ArrayList<String> planetList = new ArrayList<String>();
+//        planetList.addAll( Arrays.asList(planets) );
+
+        // Create ArrayAdapter using the planet list.
+        listAdapter = new ArrayAdapter<String>(this, R.layout.recharge_list, pinAll);
+
+        // Add more planets. If you passed a String[] instead of a List<String>
+        // into the ArrayAdapter constructor, you must not add more items.
+        // Otherwise an exception will occur.
+        /*listAdapter.add( "Ceres" );
+        listAdapter.add( "Pluto" );
+        listAdapter.add( "Haumea" );
+        listAdapter.add( "Makemake" );
+        listAdapter.add( "Eris" );*/
+
+        // Set the ArrayAdapter as the ListView's adapter.
+        listView.setAdapter( listAdapter );
 
     }
 
@@ -60,7 +98,7 @@ public class RechargeNumber extends ActionBarActivity {
             Toast.makeText(this, "You did not enter a recharge PIN", Toast.LENGTH_SHORT).show();
         } else {
             String ussd;
-
+            rechargePinDb.addPin(rechargePin);
             if (sim_type.equalsIgnoreCase("ncell")){
                  ussd= "*102*"+rechargePin;
             } else {
@@ -69,10 +107,7 @@ public class RechargeNumber extends ActionBarActivity {
                     ussd+="*10";
                 }
             }
-
-
             rechargeIntent(ussd);
-
         }
 
 
