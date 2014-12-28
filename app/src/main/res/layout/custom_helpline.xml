@@ -23,7 +23,7 @@
             android:src="@drawable/dial" />
         <LinearLayout
             android:layout_margin="4dp"
-            android:paddingLeft="10dp"
+            android:paddingLeft="0dp"
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="wrap_content"
@@ -57,8 +57,7 @@
                         android:orientation="horizontal">
                         <TextView
                             android:gravity="left"
-                            android:layout_weight="2"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:textSize="10dp"
@@ -67,9 +66,8 @@
                             android:textColor="#f7000000"/>
                         <TextView
                             android:gravity="left"
-                            android:paddingLeft="5dp"
-                            android:layout_weight="5"
-                            android:layout_width="0dp"
+                            android:paddingLeft="1dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:textSize="10dp"
@@ -85,7 +83,8 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:id="@+id/iconImage"/>
+            android:id="@+id/iconImage"
+            android:background="#fff"/>
     </LinearLayout>
 
 

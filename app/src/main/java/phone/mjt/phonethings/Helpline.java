@@ -296,6 +296,23 @@ class HelplineListAdaptor extends BaseAdapter {
         vh.title.setText(phoneArrayList.get(position).getName());
         vh.phNum.setText(phoneArrayList.get(position).getNum());
 
+        String name = phoneArrayList.get(position).getName();
+
+        if(name.indexOf("Hospital") != -1){
+            vh.iconImage.setImageResource(R.drawable.police);
+        } else if (name.indexOf("Ambulance") != -1) {
+            vh.iconImage.setImageResource(R.drawable.ambulance);
+        } else if (name.indexOf("Fire") != -1) {
+            vh.iconImage.setImageResource(R.drawable.firefighter);
+        } else if (name.indexOf("Police") != -1) {
+            vh.iconImage.setImageResource(R.drawable.hospital);
+        } else if (name.indexOf("Bank") != -1) {
+            vh.iconImage.setImageResource(R.drawable.bloodbank);
+        } else {
+            vh.iconImage.setImageResource(R.drawable.community);
+        }
+
+
 
         return convertView;
     }
