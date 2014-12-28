@@ -4,14 +4,24 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class RechargeNumber extends ActionBarActivity {
 
+    private String sim_type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recharge_number);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            sim_type = extras.getString("sim_type");
+        }
+
+        TextView textView = (TextView) findViewById(R.id.simType);
+        textView.setText("enter your "+sim_type+" scratched pin code");
     }
 
 

@@ -214,6 +214,12 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    private void recharge () {
+        Intent recharge = new Intent(this, RechargeNumber.class);
+        recharge.putExtra("sim_type",simType);
+        startActivity(recharge);
+    }
+
     private void ntc(int cellNo,int type){
         String encodedHash = Uri.encode("#");
         String ussd ;
@@ -415,6 +421,10 @@ public class MainActivity extends ActionBarActivity {
                 return true;
             case R.id.getlocation:
                 Toast.makeText(context,"getlocation",Toast.LENGTH_LONG).show();
+                return true;
+
+            case R.id.recharge:
+                recharge();
                 return true;
 
             default:
