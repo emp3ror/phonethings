@@ -217,6 +217,7 @@ public class MainActivity extends ActionBarActivity {
     private void recharge () {
         Intent recharge = new Intent(this, RechargeNumber.class);
         recharge.putExtra("sim_type",simType);
+        recharge.putExtra("simNum",simNum);
         startActivity(recharge);
     }
 
@@ -233,6 +234,8 @@ public class MainActivity extends ActionBarActivity {
             default:
                 ussd = "*9" + encodedHash;
         }
+
+        Log.e("ussd",ussd);
 
         Intent callIntent = new Intent(Intent.ACTION_CALL)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

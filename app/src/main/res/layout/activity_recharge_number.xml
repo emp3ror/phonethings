@@ -15,6 +15,7 @@ tools:context="phone.mjt.phonethings.RechargeNumber">
         android:layout_height="wrap_content"
         android:text="sim"/>
     <EditText
+        android:id="@+id/rechargePin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"/>
@@ -24,21 +25,30 @@ tools:context="phone.mjt.phonethings.RechargeNumber">
         android:orientation="horizontal"
         android:layout_gravity="center">
             <CheckBox
+                android:id="@+id/checkPostpaid"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="postPaid"/>
             <Button
+                android:id="@+id/btnRecharge"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="recharge"/>
+                android:text="recharge"
+                android:onClick="rechargeIt"/>
 
         </LinearLayout>
 
-    <ListView
+    <TextView
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"
+        android:text="Past recharge Pins"/>
+    <ListView
+        android:id="@+id/lvPastRechargePin"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"></ListView>
 
 </LinearLayout>
 
