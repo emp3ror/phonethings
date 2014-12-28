@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/getPhNo" android:title="get cell number"/>
     <item android:id="@+id/getBal" android:title="check balance"/>
+    <item android:id="@+id/recharge" android:title="Recharge "/>
+    <item android:id="@+id/getPhNo" android:title="get cell number"/>
+
 </menu>

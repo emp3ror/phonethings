@@ -98,9 +98,10 @@
 
     <fragment
         android:id="@+id/adFragment"
-        android:name="phone.mjt.phonethings.MainActivity$AdFragment"
+        android:name="phone.mjt.phonethings.AdFragment"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        tools:layout="@layout/fragment_ad" />
 
 </RelativeLayout>
