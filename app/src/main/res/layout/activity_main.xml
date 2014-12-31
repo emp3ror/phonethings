@@ -30,29 +30,43 @@
                         android:gravity="center"/>
                     <TextView
                         android:id="@+id/btn_sim1"
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
+                        android:layout_width="120dp"
+                        android:layout_height="70dp"
                         android:text="Sim 1"
                         android:background="@drawable/simbackground"
                         android:gravity="center"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="0dp"/>
                     <TextView
                         android:id="@+id/btn_sim2"
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
+                        android:layout_width="120dp"
+                        android:layout_height="70dp"
                         android:background="@drawable/simbackground"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="0dp"
                         android:text="sim 2"
                         android:gravity="center"/>
                 </LinearLayout>
                 <ImageView
-                    android:id="@+id/location"
+                    android:id="@+id/btnSwitch"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/location"
-                    android:layout_gravity="bottom"/>
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/btn_switch_off"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="0dp"/>
+
                 </LinearLayout>
-            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/helpline"
+                    android:layout_width="250dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/helpline"
+                    android:layout_gravity="center"
+                    android:onClick="helpline"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,26 +87,15 @@
                     android:src="@drawable/bluetooth"
                     android:layout_marginLeft="10dp"/>
                 <ImageView
-                    android:id="@+id/btnSwitch"
+                    android:id="@+id/location"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/btn_switch_off"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_height="100dp"
+                    android:src="@drawable/location"
+                    android:layout_gravity="center"/>
+
                 </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-                <ImageView
-                    android:id="@+id/helpline"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/helpline"
-                    android:layout_gravity="center"
-                    android:onClick="helpline"/>
-            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

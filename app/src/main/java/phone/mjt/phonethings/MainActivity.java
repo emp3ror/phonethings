@@ -48,8 +48,7 @@ public class MainActivity extends ActionBarActivity {
     private TextView btnSim2;
     private ImageView btnLocation;
     private TelephonyManager tMgr;
-    private float[] gravity= new float[3];
-    private float[] linear_acceleration = new float[3];
+
     private Context context;
     private String sim1, sim2, clicked,simType;
     private int simNum;
@@ -198,6 +197,8 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 MediaPlayer mp = MediaPlayer.create(context,R.raw.bombdrop);
                 mp.start();
+                Intent accelerometer = new Intent(context, Accelerometer.class);
+                startActivity(accelerometer);
                 Toast.makeText(context,"MJT is working on it",Toast.LENGTH_LONG).show();
             }
         });

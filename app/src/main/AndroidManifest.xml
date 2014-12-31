@@ -56,6 +56,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="phone.mjt.phonethings.MainActivity" />
         </activity>
+        <activity
+            android:name=".Accelerometer"
+            android:label="@string/title_activity_accelerometer"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="phone.mjt.phonethings.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

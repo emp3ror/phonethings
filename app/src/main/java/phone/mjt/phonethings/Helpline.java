@@ -299,13 +299,13 @@ class HelplineListAdaptor extends BaseAdapter {
         String name = phoneArrayList.get(position).getName();
 
         if(name.indexOf("Hospital") != -1){
-            vh.iconImage.setImageResource(R.drawable.police);
+            vh.iconImage.setImageResource(R.drawable.hospital);
         } else if (name.indexOf("Ambulance") != -1) {
             vh.iconImage.setImageResource(R.drawable.ambulance);
         } else if (name.indexOf("Fire") != -1) {
             vh.iconImage.setImageResource(R.drawable.firefighter);
         } else if (name.indexOf("Police") != -1) {
-            vh.iconImage.setImageResource(R.drawable.hospital);
+            vh.iconImage.setImageResource(R.drawable.police);
         } else if (name.indexOf("Bank") != -1) {
             vh.iconImage.setImageResource(R.drawable.bloodbank);
         } else {
