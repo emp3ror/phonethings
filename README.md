@@ -2,7 +2,7 @@
 
 This repository contains the source code for the phone things.
 
-[![Download from Google Play]()](https://play.google.com/store/apps/details?id=com.github.mobile)
+[![Download from Google Play](https://raw.githubusercontent.com/emp3ror/phonethings/master/banner.png)](https://play.google.com/store/apps/details?id=phone.mjt.phonethings)
 
 
 Please see the [issues](https://github.com/emp3ror/phonethings/issues) section to
