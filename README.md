@@ -11,6 +11,7 @@ report any bugs or feature requests and to see the list of known issues.
 ## License
 
 * [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
+Dont be ass by justing renaming app and publishing in the store :P , atleast modify some :D
 
 ## Building
 
