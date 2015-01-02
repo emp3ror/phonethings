@@ -6,6 +6,11 @@
 # files for the dex VM
 *.dex
 
+# log
+*.log
+
+*.jks
+
 # Java class files
 *.class
 
