@@ -245,6 +245,10 @@ public class Helpline extends ActionBarActivity {
             Intent about = new Intent(this, About.class);
             startActivity(about);
             return true;
+        } else if (id == R.id.action_settings) {
+            Intent SettingActivity = new Intent(this, SettingActivity.class);
+            startActivity(SettingActivity);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

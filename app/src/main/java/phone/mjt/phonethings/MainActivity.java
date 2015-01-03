@@ -2,6 +2,7 @@ package phone.mjt.phonethings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -33,9 +34,10 @@ public class MainActivity extends ActionBarActivity {
     private Context context;
     private String sim1, sim2, clicked,simType;
     private int simNum;
-    private double latitude, longitude, acc, altitude;
-    /*private SensorManager senSensorManager;
-    private Sensor senAccelerometer;*/
+
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    SharedPreferences sharedpreferences;
+
 
     private ImageView btnAccelerometer, btnBluetooth;
     /*flash light*/
@@ -61,18 +63,33 @@ public class MainActivity extends ActionBarActivity {
         btnAccelerometer = (ImageView) findViewById(R.id.btnAccelerometer);
         btnBluetooth = (ImageView) findViewById(R.id.btnBluetooth);
 
+
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+        String restoredText = prefs.getString("clicked", null);
+        if (restoredText !=null){
+            if (restoredText.equalsIgnoreCase("ntc")){
+                sim2 = "ntc";
+                btnSim2.setText("Namaste");
+            } else {
+                btnSim2.setText("Ncell");
+                sim2 = "ncell";
+            }
+        } else {
+            btnSim2.setVisibility(View.INVISIBLE);
+        }
+
         tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         String currentOperator = tMgr.getSimOperatorName();
         btnSim1.setText(currentOperator);
         String lowerCased = currentOperator.toLowerCase();
         if (lowerCased.equalsIgnoreCase("ncell")){
-            btnSim2.setText("Namaste");
+//            btnSim2.setText("Namaste");
             sim1 = "ncell";
-            sim2 = "ntc";
+//            sim2 = "ntc";
         } else {
             Log.e("currentOperator=","**"+currentOperator.toLowerCase());
-            btnSim2.setText("Ncell");
-            sim2 = "ncell";
+//            btnSim2.setText("Ncell");
+//            sim2 = "ncell";
             sim1 = "ntc";
         }
 
@@ -113,17 +130,6 @@ public class MainActivity extends ActionBarActivity {
 //                openContextMenu(view);
             }
         });
-
-        /*LocationManager locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        String providerName=LocationManager.NETWORK_PROVIDER;
-//        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        Location location2=locationManager.getLastKnownLocation(providerName);
-        if(location2!= null){
-            latitude = location2.getLatitude();
-            longitude = location2.getLongitude();
-            acc = location2.getAccuracy();
-            altitude = location2.getAltitude();
-        }*/
 
         /*
          * First check if device is supporting flashlight or not
@@ -279,34 +285,14 @@ public class MainActivity extends ActionBarActivity {
             Intent about = new Intent(this, About.class);
             startActivity(about);
             return true;
+        } else if (id == R.id.action_settings) {
+            Intent SettingActivity = new Intent(this, SettingActivity.class);
+            startActivity(SettingActivity);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-    /*@Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
-        Sensor mySensor = sensorEvent.sensor;
-
-        if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
-
-            final float alpha = (float) 0.8;
-
-            gravity[0] = alpha * gravity[0] + (1 - alpha) * sensorEvent.values[0];
-            gravity[1] = alpha * gravity[1] + (1 - alpha) * sensorEvent.values[1];
-            gravity[2] = alpha * gravity[2] + (1 - alpha) * sensorEvent.values[2];
-
-            linear_acceleration[0] = sensorEvent.values[0] - gravity[0];
-            linear_acceleration[1] = sensorEvent.values[1] - gravity[1];
-            linear_acceleration[2] = sensorEvent.values[2] - gravity[2];
-//            textSim2.setText("x ="+x+"      "+linear_acceleration[0]+"\ny="+y+"      "+linear_acceleration[1]+"\nz="+z+"      "+linear_acceleration[2]);
-
-        }
-    }*/
 
     /*get camera*/
 
@@ -385,13 +371,6 @@ public class MainActivity extends ActionBarActivity {
         MenuInflater inflater = getMenuInflater();
         if (clicked.equalsIgnoreCase("sim")){
             inflater.inflate(R.menu.cell_menu, menu);
-        }
-        else if (clicked.equalsIgnoreCase("location")){
-            menu.setHeaderTitle("Location By tower");
-            menu.add(Menu.NONE, v.getId(), 0, "Latitude : "+latitude);
-            menu.add(Menu.NONE, v.getId(), 0, "Longitude : "+longitude);
-            menu.add(Menu.NONE, v.getId(), 0, "Accuracy : "+acc);
-            menu.add(Menu.NONE, v.getId(), 0, "Altitude : "+altitude);
         }
 
     }

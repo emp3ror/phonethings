@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "phone.mjt.phonethings"
-        minSdkVersion 10
+        minSdkVersion 11
         targetSdkVersion 20
-        versionCode 7
-        versionName "mjt_1.5"
+        versionCode 8
+        versionName "mjt_1.6"
     }
     buildTypes {
         release {

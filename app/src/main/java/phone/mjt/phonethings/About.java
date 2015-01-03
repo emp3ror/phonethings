@@ -1,6 +1,8 @@
 package phone.mjt.phonethings;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ public class About extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00212121")));
     }
 
     public void github(View view){
