@@ -2,6 +2,8 @@ package phone.mjt.phonethings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Criteria;
 import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +11,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class Location extends ActionBarActivity {
@@ -18,12 +27,18 @@ public class Location extends ActionBarActivity {
     private TextView accuracyField;
     private LocationManager locationManager;
     private String provider;
-
+    private GoogleMap googleMap;
+    private MarkerOptions marker;
+    private LatLng latLng;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+
+        context = getApplicationContext();
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#77212121")));
 
         latituteField = (TextView) findViewById(R.id.latitude);
         longitudeField = (TextView) findViewById(R.id.longitute);
@@ -45,15 +60,61 @@ public class Location extends ActionBarActivity {
             latituteField.setText("Location not available");
             longitudeField.setText("Location not available");
         }
+
+
     }
 
     public void onLocationChanged(android.location.Location location) {
-        float lat = (float) (location.getLatitude());
-        float lng = (float) (location.getLongitude());
+        double lat = (double) (location.getLatitude());
+        double lng = (double) (location.getLongitude());
         double acc = (double) (location.getAccuracy());
-        latituteField.setText(String.valueOf(lat));
-        longitudeField.setText(String.valueOf(lng));
-        accuracyField.setText(String.valueOf(acc));
+        latituteField.setText("latitude : "+String.valueOf(lat));
+        longitudeField.setText("longitude : "+String.valueOf(lng));
+        accuracyField.setText("accuracy : "+String.valueOf(acc));
+        // latitude and longitude
+
+        latLng = new LatLng(lat,lng);
+// create marker
+        marker = new MarkerOptions().position(new LatLng(lat, lng)).title("Hello Maps ");
+
+        try {
+            // Loading map
+            initilizeMap();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * function to load map. If map is not created it will create it for you
+     * */
+    private void initilizeMap() {
+        if (googleMap == null) {
+            googleMap = ((MapFragment) getFragmentManager().findFragmentById(
+                    R.id.map)).getMap();
+            googleMap.addMarker(marker);
+
+            // Move the camera instantly to hamburg with a zoom of 15.
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+
+            // check if map is created successfully or not
+            if (googleMap == null) {
+                Toast.makeText(getApplicationContext(),
+                        "Sorry! unable to create maps", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initilizeMap();
     }
 
 
