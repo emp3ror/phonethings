@@ -277,5 +277,6 @@ Zimbabwe 	ZW 	ZWE 	716 	ISO 3166-2:ZW
     <string name="action_settings">Settings</string>
     <string name="title_activity_recharge_number">RechargeNumber</string>
     <string name="title_activity_accelerometer">accelerometer</string>
+    <string name="title_activity_location">Location</string>
 
 </resources>

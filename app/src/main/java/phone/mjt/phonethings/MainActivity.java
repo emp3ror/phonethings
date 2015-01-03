@@ -124,17 +124,18 @@ public class MainActivity extends ActionBarActivity {
         });
 
         /* register location icon for context menu*/
-        registerForContextMenu(btnLocation);
+//        registerForContextMenu(btnLocation);
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clicked="location";
-
-                openContextMenu(view);
+                Intent locationActivity = new Intent(context, phone.mjt.phonethings.Location.class);
+                startActivity(locationActivity);
+//                openContextMenu(view);
             }
         });
 
-        LocationManager locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        /*LocationManager locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
         String providerName=LocationManager.NETWORK_PROVIDER;
 //        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         Location location2=locationManager.getLastKnownLocation(providerName);
@@ -143,7 +144,7 @@ public class MainActivity extends ActionBarActivity {
             longitude = location2.getLongitude();
             acc = location2.getAccuracy();
             altitude = location2.getAltitude();
-        }
+        }*/
 
         /*
          * First check if device is supporting flashlight or not
